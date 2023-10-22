@@ -125,10 +125,12 @@ extension TaskEightView {
 
         // MARK: - computed properties
 
-        private var scale: CGFloat {
-            let newVolume = volume + volumeChange
+        private var newVolume: CGFloat {
+            volume + volumeChange
+        }
 
-            return newVolume > Constants.barHeight
+        private var scale: CGFloat {
+            newVolume > Constants.barHeight
             ? newVolume / Constants.barHeight
             : 1 + -(newVolume / Constants.barHeight)
         }
@@ -162,9 +164,8 @@ extension TaskEightView {
                 return 1.0
             }
 
-            return (volume + volumeChange) > 0
-            ? (-scale * 10)
-            : (scale * 10)
+            let newScale = scale * 10
+            return newVolume > 0 ? -newScale : newScale
         }
     }
 }
